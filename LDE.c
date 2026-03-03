@@ -62,6 +62,32 @@ void inserir(LDE *l, int valor){
     l->qtde++;
 }
 
+void remover(LDE *l, int valor){
+    // buscar(l, valor);
+
+    Celula *atual = l->primeiro;
+    Celula *anterior = NULL;
+
+    while(atual != NULL && atual->valor != valor){
+        anterior = atual;
+        atual= atual->proximo;
+    }
+
+    if (atual == NULL || l->qtde == 0){
+        printf("Não encontrou %d ou lista vazia\n", valor);
+        return;
+    }
+    else if (anterior == NULL){
+        l->primeiro = atual->proximo;
+    }
+    else{
+        anterior->proximo = atual->proximo;
+    }
+    free(atual);
+    l->qtde--;
+    printf("Encontrou %d\n", valor);
+}
+
 int buscar(LDE *l, int valor){
     Celula *atual;
     atual = l->primeiro;
@@ -79,17 +105,43 @@ int buscar(LDE *l, int valor){
 }
 
 int main() {
-    printf("Lista Dinamica Encadeada\n");
+    printf("Lista Dinamica Encadeada (LDE)\n");
 
     LDE *l = inicializa();
-    
-    inserir(l, 0);
-    inserir(l, 1);
-    inserir(l, 3);
-    inserir(l, 2);
-    imprimir(l);
 
-    buscar(l, 4);
+    int valores[] = {3, 6, 1, 9, 0, 4, 2, 8, 7, 5};
+
+    for(int i = 0; i < 10; i++){
+        inserir(l, i);
+        imprimir(l);
+    }
+
+    for(int i = 0; i < 10; i++){
+        remover(l, i);
+        imprimir(l);
+    }
+    
+    //inserir(l, 18);
+    //inserir(l, 30);
+    //inserir(l, 23);
+    //imprimir(l);
+
+    //remover(l, 50);
+    //imprimir(l);
+
+    //remover(l, 18);
+    // imprimir(l);
+
+    //remover(l, 23);
+    //imprimir(l);
+
+    //remover(l, 30);
+    //imprimir(l);
+
+    //remover(l, 31);
+    //imprimir(l);
+
+    // buscar(l, 4);
     
     return 0;
 }
