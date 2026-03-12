@@ -79,6 +79,52 @@ void insert(LDDE *lista, int valor){
     lista->qtde++;
 }
 
+void remover(LDDE *lista, int valor){
+    Celula *atual = lista->primeira;
+    Celula *anterior = NULL;
+
+    while(atual != NULL && atual->valor != valor){
+        anterior = atual;
+        atual = atual->proxima;
+    }
+    // lista vazia e elemento não encontrado
+    if(atual == NULL){ 
+        return;
+    }
+    else if(anterior == NULL){
+        if(atual->proxima != NULL){
+            atual->proxima->anterior = NULL;
+        }
+        atual->proxima->anterior = NULL;
+        lista->primeira = atual->proxima;
+        lista->qtde--;
+        free(atual);
+        return;
+    }
+
+    anterior->proxima = atual->proxima;
+    if(atual->proxima != NULL){
+        atual->proxima->anterior = anterior;
+    }
+    lista->qtde--;
+    free(atual);
+    return;
+}
+
+void imprimir_invertido(LDDE *lista){
+    printf("[ ");
+    Celula *atual = lista->primeira;
+    while (atual->proxima != NULL){
+        atual = atual->proxima;
+    }
+    while(atual->anterior != NULL){
+        printf("%d ", atual->valor);
+        atual = atual->anterior;
+    }
+    printf("%d", atual->valor);
+    printf(" ]\n");
+}
+
 int main(){
     printf("Lista Dinamica Duplamente Encadeada (LDDE)\n");
     LDDE *lista = inicializa();
@@ -86,6 +132,9 @@ int main(){
     insert(lista, 20);
     insert(lista, 10);
     insert(lista, 0);
+    mostrar(lista);
+    imprimir_invertido(lista);
+    remover(lista, 1);
     mostrar(lista);
     return 0;
 }
