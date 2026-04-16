@@ -1,5 +1,3 @@
-# Estrutura-de-Dados
-Estudo de algoritimos
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,12 +29,11 @@ Celula *inicializa_celula(char valor){
 
 void mostrar(Pilha *p){
     Celula *atual = p->topo;
-    printf("[ ");
     while(atual != NULL){
-        printf("%c ", atual->valor);
+        printf("%c", atual->valor);
         atual = atual->proximo;
     }
-    printf("]\n");
+    printf("\n");
 }
 
 void empilhar(Pilha *p, char valor){
@@ -57,7 +54,6 @@ char desempilhar(Pilha *p){
     Celula *atual = p->topo;
     char valor = p->topo->valor;
 
-
     p->topo = p->topo->proximo;
     if(p->topo != NULL){
         p->topo->anterior = NULL;
@@ -72,38 +68,28 @@ int main(){
 
     Pilha *p = inicializa_pilha();
 
+    empilhar(p, 'A');
     mostrar(p);
-
-    empilhar(p, 'p');
+    empilhar(p, 'R');
     mostrar(p);
-    empilhar(p, 'i');
+    empilhar(p, 'A');
     mostrar(p);
-    empilhar(p, 'l');
+    empilhar(p, 'R');
     mostrar(p);
-    empilhar(p, 'h');
-    mostrar(p);
-    empilhar(p, 'a');
+    empilhar(p, 'A');
     mostrar(p);
 
     char valor;
     valor = desempilhar(p);
-    printf("%c\n", valor);
-    mostrar(p);
-
+    printf("%c", valor);
     valor = desempilhar(p);
-    printf("%c\n", valor);
-    mostrar(p);
-
+    printf("%c", valor);
     valor = desempilhar(p);
-    printf("%c\n", valor);
-    mostrar(p);
-
+    printf("%c", valor);
     valor = desempilhar(p);
-    printf("%c\n", valor);
-    mostrar(p);
-
+    printf("%c", valor);
     valor = desempilhar(p);
-    printf("%c\n", valor);
+    printf("%c", valor);
     mostrar(p);
 
     return 0;
